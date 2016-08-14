@@ -1,4 +1,17 @@
-{% extends 'schedules/base.html' %}
+{% extends 'base.html' %}
+
 {% block content %}
-    <h1>안녕하세요</h1>
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>{{ title }}</h1>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" class="btn btn-default" value="submit">
+        </form>
+        {% for date in current_user.date_set.all %}
+            <blockquote>
+            <a href = "{{ date.get_absolute_url }}">{{ date.daily}}</a><br>
+            </blockquote>
+        {% endfor %}
+    </div>
 {% endblock %}
